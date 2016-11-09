@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /* Importation de la classe Lecture. */
 
 
@@ -20,7 +22,7 @@ class SystemeEmprunt {
 	 * @return
 	 */
 	private boolean nouveauClient() {
-	
+		Random rd = new Random();
 		Site depart;
 		Site arrivee;
 	
@@ -28,9 +30,9 @@ class SystemeEmprunt {
 			System.out.println("Le nombre maximum de clients est atteint.");
 			return false;
 		}
-	
-		depart = sites[0];
-		arrivee = sites[1];
+		
+		depart = sites[rd.nextInt(nbSites)];
+		arrivee = sites[rd.nextInt(nbSites)];
 	
 		clients[nbClients] = new Client(nbClients, depart, arrivee);
 		nbClients++;
@@ -56,14 +58,9 @@ class SystemeEmprunt {
 		}
 		
 		/*Instanciation du camion*/
-		CamionEquilibrage camion = new CamionEquilibrage(sites);
+		CamionEquilibrage camion = new CamionEquilibrage(sites, 10);
 		camion.start();
 		
-		
-		
-		
-
-	    /* ... */
 	}
 	
 	/**

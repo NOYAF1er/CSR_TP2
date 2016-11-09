@@ -11,9 +11,10 @@ public class CamionEquilibrage extends Thread {
 	 * Définit l'ensemble des sites à parcourir
 	 * @param sites Ensemble des sites à parcourir
 	 */
-	public CamionEquilibrage(Site[] sites){
+	public CamionEquilibrage(Site[] sites, int stockInitial){
 		this.setDaemon(true);
 		this.sites = sites;
+		this.stock = stockInitial;
 	}
 	
 	/**
@@ -37,7 +38,7 @@ public class CamionEquilibrage extends Thread {
 			int siteSuivant = (i+1) % sites.length;
 			long distanceSites = (long) (Math.abs(sites[siteSuivant].getNumSite() - sites[i].getNumSite()) * 150); //Calcul de la distance entre le site courant et le suivant
 			Site site = sites[i];
-			System.out.println("Camion au niveau du site "+ site.getNumSite());			
+			System.out.println("Camion au niveau du site "+ site.getNumSite() + "| StockCamion = " + this.stock);			
 			site.equilibrage(this);; //Equilibre le stock de vélo du site (et du camion)
 
 			try {
